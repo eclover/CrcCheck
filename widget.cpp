@@ -21,6 +21,7 @@ Widget::Widget(QWidget *parent) : QWidget(parent)
     resultConvert = new QLineEdit;
     input16 = new QLineEdit;
     result16 = new QLineEdit;
+    inputCrcGB->setMaximumHeight(150);
 
     btn10To2 = new QPushButton(tr("10进制转2进制"));
     btn10To8 = new QPushButton(tr("10进制转8进制"));
@@ -127,26 +128,33 @@ void Widget::btnFloatTo16Clicked()
 
 void Widget::btn10To2Clicked()
 {
-    QString strData = QString::number(inputConvert->text().toInt(),2);
+    QStringList list = inputConvert->text().split(" ");
+    QString strData =list.join("");
+    strData = QString::number(strData.toInt(),2);
     resultConvert->setText(strData);
 
 }
 
 void Widget::btn10To8Clickd()
 {
-    QString strData = QString::number(inputConvert->text().toInt(),8);
+    QStringList list = inputConvert->text().split(" ");
+    QString strData =list.join("");
+    strData = QString::number(strData.toInt(),8);
     resultConvert->setText(strData);
 }
 
 void Widget::btn10To16Clicked()
 {
-    QString strData = QString::number(inputConvert->text().toInt(),16);
+    QStringList list = inputConvert->text().split(" ");
+    QString strData =list.join("");
+    strData = QString::number(strData.toInt(),16);
     resultConvert->setText(strData);
 }
 
 void Widget::btn2To10Clicked()
 {
-    QString strData = inputConvert->text();
+    QStringList list = inputConvert->text().split(" ");
+    QString strData =list.join("");
     bool ok;
     int hex = strData.toInt(&ok,2);
     if(ok){
@@ -161,7 +169,8 @@ void Widget::btn2To10Clicked()
 
 void Widget::btn8To10Clicked()
 {
-    QString strData = inputConvert->text();
+    QStringList list = inputConvert->text().split(" ");
+    QString strData =list.join("");
     bool ok;
     int data = strData.toInt(&ok,8);
     if(ok){
@@ -175,7 +184,8 @@ void Widget::btn8To10Clicked()
 
 void Widget::btn16To10Clicked()
 {
-    QString strData = inputConvert->text();
+    QStringList list = inputConvert->text().split(" ");
+    QString strData =list.join("");
     bool ok;
     int hex = strData.toInt(&ok,16);
     if(ok){
@@ -191,7 +201,8 @@ void Widget::btn16To10Clicked()
 
 void Widget::btnAsciiTo10Clicked()
 {
-    QString strData = inputConvert->text();
+    QStringList list = inputConvert->text().split(" ");
+    QString strData =list.join("");
     QString data;
     for(int i=0;i<strData.length();i++){
         QString str = strData.at(i);
@@ -208,7 +219,8 @@ void Widget::btnAsciiTo10Clicked()
 //Ascii 码转16进制
 void Widget::btnAsciiTo16Clicked()
 {
-    QString strData = inputConvert->text();
+    QStringList list = inputConvert->text().split(" ");
+    QString strData =list.join("");
     QString data;
     for(int i=0;i<strData.length();i++){
         QString str = strData.at(i);
@@ -218,14 +230,16 @@ void Widget::btnAsciiTo16Clicked()
     }
     resultConvert->setText(data);
 }
-
+//16进制转浮点数
 void Widget::btn16ToFloatClicked()
 {
-    QString strData = inputConvert->text();
-    int hex = strData.toInt(0,16);
+    QStringList list = inputConvert->text().split(" ");
+    QString data =list.join("");
+    int hex = data.toInt(0,16);
     float value = *(float*)&hex;
-    strData = QString::number(value,10,6);
-    resultConvert->setText(strData);
+
+    data = QString::number(value,10,6);
+    resultConvert->setText(data);
 }
 
 void Widget::btn16ToAsciiClicked()

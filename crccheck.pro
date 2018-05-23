@@ -11,3 +11,5 @@ RESOURCES +=
 
 OTHER_FILES += icon.rc
 RC_FILE = icon.rc
+
+DEFINES += QT_NO_DEBUG_OUTPUT
